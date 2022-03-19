@@ -55,3 +55,48 @@ test('should setted this.defence in class Bowerman', () => {
   const character = new Bowerman('Gleb', 'Bowman', 25, 20);
   expect(character.defence).toEqual(expected);
 });
+
+test('should up attact by levelUp method', () => {
+  const expected = 12;
+  const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+  character.levelUp();
+  expect(character.attack).toEqual(expected);
+});
+
+test('should up defence by levelUp method', () => {
+  const expected = 12;
+  const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+  character.levelUp();
+  expect(character.defence).toEqual(expected);
+});
+
+test('should up health to 100 by levelUp method', () => {
+  const expected = 100;
+  const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+  character.health = 90;
+  character.levelUp();
+  expect(character.health).toEqual(expected);
+});
+
+test('should throw error when levelUp worked when this.health = 0 ', () => {
+  expect(() => {
+    const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+    character.health = 0;
+    character.levelUp();
+  }).toThrow();
+});
+
+test('should lower this.health when works damage(points)', () => {
+  const expected = 55;
+  const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+  character.damage(50);
+  expect(character.health).toEqual(expected);
+});
+
+test('should when works damage(points) if already was this.health = 0 ', () => {
+  expect(() => {
+    const character = new Bowerman('Gleb', 'Swordsman', 10, 10);
+    character.health = 0;
+    character.damage(50);
+  }).toThrow();
+});
